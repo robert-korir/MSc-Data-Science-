@@ -1,0 +1,95 @@
+import random
+from tkinter import *
+
+def load_file_with_nubers():
+    random.seed()
+
+    f=open("raw_results.txt", "w")
+
+    for _ in range(0,100):
+        f.write(str(random.randint(1, 100)) + "\n")
+
+def examine_numbers():
+    f = open("raw_results.txt", "r")
+    values = f.readlines()
+    f.close()
+    f = open("results_filtered.txt", "w")
+    count = 0
+
+    for x in values:
+        value = int(x)
+        if value < 80 and value > 20:
+            count += 1
+            f.write(str(value) + ", ")
+    print(str(count) + " entries were valid.")
+    f.seek(0, 2)
+    print("The file is " + str(f.tell()) + " characters long")
+    f.close()
+
+load_file_with_nubers()
+examine_numbers()
+
+mw = Tk()
+mw.title("METER SYSTEM 2000")
+mw.config(height=400, width=500, bg='azure2')
+l1 = Label(mw, text="Add the company and the measurement number!", bg="azure2")
+l1.place(x=20, y=20)
+l2 = Label(mw, text="Comp.: ", bg="azure2")
+l2.place(x=30, y=50)
+e1 = Entry(mw, bg="aquamarine")
+e1.place(x=80, y=50)
+l3 = Label(mw, text="No.: ", bg="azure2")
+l3.place(x=30, y=70)
+e2 = Entry(mw, bg="aquamarine")
+e2.place(x=80, y=70)
+b1 = Button(mw, text="OK", bg="springgreen")
+b1.place(x=170, y=100)
+l4 = Label(mw, text="Range: na", bg="azure2")
+l4.place(x=30, y=140)
+l7=Label(mw, text="Generate data: Error", bg="azure2", fg="red")
+l7.place(x=30, y=160)
+l5 = Label(mw, text="Error message: -", bg="azure2", fg="darkred")
+l5.place(x=30, y=360)
+l6 = Label(mw, text="Generate data:", bg="azure2")
+l6.place(x=300, y=20)
+tart = IntVar()
+l7=Label(mw, text="MIN", bg="azure2")
+l7.place(x=260, y=50)
+l8=Label(mw, text="MAX", bg="azure2")
+l8.place(x=260, y=70)
+e3=Entry(mw)
+e3.place(x=300, y=50)
+e4=Entry(mw)
+e4.place(x=300, y=70)
+maximum = IntVar()
+r3 = Checkbutton(mw, text="Average", variable=maximum, onvalue=1, offvalue=0, bg="azure2")
+r3.place(x=260, y=110)
+r4 = Checkbutton(mw, text="Number", variable=maximum, onvalue=1, offvalue=0, bg="azure2")
+r4.place(x=260, y=130)
+l7 = Label(mw, text="----------------", bg="azure2")
+l7.place(x=260, y=90)
+b2 = Button(mw, text="OK", bg="springgreen")
+b2.place(x=400, y=120)
+b6 = Button(mw, text="OK", bg="royalblue", fg="white")
+b6.place(x=440, y=55)
+l7 = Label(mw, text="Results: na", bg="azure2")
+l7.place(x=260, y=170)
+l8 = Label(mw, text="------------------\nSelect operation!\n------------------", bg="azure2")
+l8.place(x=30, y=200)
+var = StringVar()
+var.set("display")
+r5 = Radiobutton(mw, text="Display data", variable=var, value="display", bg="azure2")
+r5.place(x=50, y=250)
+r6 = Radiobutton(mw, text="Write to file", variable=var, value="write", bg="azure2")
+r6.place(x=50, y=270)
+l9 = Label(mw, text="Enter the file name in case of SAVE ", bg="azure2")
+l9.place(x=70, y=290)
+e3 = Entry(mw, bg="pink1")
+e3.place(x=275, y=290)
+b3 = Button(mw, text="OK", bg="springgreen")
+b3.place(x=420, y=285)
+l10 = Label(mw, text="Display data", bg="azure2")
+l10.place(x=60, y=320)
+
+mw.mainloop()
+
